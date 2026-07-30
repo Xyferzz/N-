@@ -21,16 +21,39 @@ chooseBtn.addEventListener("click", () => {
 
 /* Preview */
 
-imageInput.addEventListener("change", () => {
+imageInput.addEventListener("change", async () => {
 
     const file = imageInput.files[0];
-
     if (!file) return;
 
-    preview.src = URL.createObjectURL(file);
+    uploadStatus.textContent = "Uploading...";
+    progressBar.style.width = "20%";
+
+    const fileName = Date.now() + "_" + file.name.replace(/\s+/g, "_");
+
+    const { error } = await supabase.storage
+        .from("NovaBox")
+        .upload(fileName, file);
+
+    if (error) {
+        uploadStatus.textContent = error.message;
+        progressBar.style.width = "0%";
+        return;
+    }
+
+    progressBar.style.width = "100%";
+
+    const { data } = supabase.storage
+        .from("NovaBox")
+        .getPublicUrl(fileName);
+
+    imageUrl.value = data.publicUrl;
+
+    preview.src = data.publicUrl;
+
+    uploadStatus.textContent = "Upload success.";
 
 });
-
 /* Upload */
 
 uploadBtn.addEventListener("click", async () => {
