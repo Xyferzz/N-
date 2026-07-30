@@ -2,7 +2,7 @@
   "rewrites": [
     {
       "source": "/i/:code",
-      "destination": "/view.html?code=:code"
+      "destination": "/api/image?code=:code"
     }
   ]
 }
