@@ -1,0 +1,8 @@
+{
+  "rewrites": [
+    {
+      "source": "/i/:code",
+      "destination": "/view.html?code=:code"
+    }
+  ]
+}
