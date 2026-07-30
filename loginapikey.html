@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NovaBox - Login API Key</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<main class="login-container">
+
+    <!-- Logo -->
+    <div class="login-logo">
+
+        <h1>NovaBox</h1>
+
+        <p>
+            Login using your email to get your API Key.
+        </p>
+
+    </div>
+
+    <!-- Login Card -->
+    <section class="login-card">
+
+        <h2>Login</h2>
+
+        <p class="login-description">
+            We'll send a secure Magic Link to your email.
+        </p>
+
+        <label>Email Address</label>
+
+        <input
+            type="email"
+            id="email"
+            placeholder="example@gmail.com">
+
+        <button id="sendMagicLinkBtn">
+            Send Magic Link
+        </button>
+
+        <p id="statusMessage">
+            Enter your email and press the button above.
+        </p>
+
+    </section>
+
+    <!-- Back -->
+    <div class="back-home">
+
+        <a href="index.html">
+            ← Back to Home
+        </a>
+
+    </div>
+
+    <!-- Footer -->
+    <footer>
+
+        <p>
+            © 2026 NovaBox • Secure Image Hosting
+        </p>
+
+    </footer>
+
+</main>
+
+<script src="auth.js" type="module"></script>
+
+</body>
+</html>
