@@ -50,6 +50,22 @@ imageInput.addEventListener("change", async () => {
         .from("NovaBox")
         .getPublicUrl(fileName);
 
+    // Generate short code
+    const code = Math.random().toString(36).substring(2, 8);
+
+    const { error: linkError } = await supabase
+        .from("links")
+        .insert({
+            code: code,
+            file_url: data.publicUrl
+        });
+
+    if (linkError) {
+        uploadStatus.textContent = linkError.message;
+        progressBar.style.width = "0%";
+        return;
+    }
+
 
     progressBar.style.width = "100%";
 
