@@ -29,7 +29,10 @@ imageInput.addEventListener("change", async () => {
     uploadStatus.textContent = "Uploading...";
     progressBar.style.width = "20%";
 
-    const fileName = Date.now() + "_" + file.name.replace(/\s+/g, "_");
+    const fileName =
+        Date.now() +
+        "_" +
+        file.name.replace(/\s+/g, "_");
 
     const { error } = await supabase.storage
         .from("NovaBox")
@@ -41,15 +44,34 @@ imageInput.addEventListener("change", async () => {
         return;
     }
 
-    progressBar.style.width = "100%";
+    progressBar.style.width = "70%";
 
     const { data } = supabase.storage
         .from("NovaBox")
         .getPublicUrl(fileName);
 
-    imageUrl.value = data.publicUrl;
+    // Generate short code
+    const code = Math.random().toString(36).substring(2, 8);
+
+    const { error: linkError } = await supabase
+        .from("links")
+        .insert({
+            code: code,
+            file_url: data.publicUrl
+        });
+
+    if (linkError) {
+        uploadStatus.textContent = linkError.message;
+        progressBar.style.width = "0%";
+        return;
+    }
+
+    progressBar.style.width = "100%";
 
     preview.src = data.publicUrl;
+
+    imageUrl.value =
+        `${location.origin}/i/${code}`;
 
     uploadStatus.textContent = "Upload success.";
 
