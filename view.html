@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NekoBox</title>
+</head>
+<body>
+
+<p id="status">Loading...</p>
+
+<script type="module">
+
+import { supabase } from "./config.js";
+
+const params = new URLSearchParams(window.location.search);
+const code = params.get("code");
+
+if (!code) {
+    document.getElementById("status").textContent = "Invalid URL";
+    throw new Error("No code");
+}
+
+const { data, error } = await supabase
+    .from("links")
+    .select("file_url")
+    .eq("code", code)
+    .single();
+
+if (error || !data) {
+
+    document.getElementById("status").textContent = "404 Image Not Found";
+
+} else {
+
+    location.replace(data.file_url);
+
+}
+
+</script>
+
+</body>
+</html>
