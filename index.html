@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NovaBox - Image Hosting</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<div class="container">
+
+    <div class="logo">
+        <h1>NovaBox</h1>
+        <p>Fast • Free • Image Hosting</p>
+    </div>
+
+    <div class="upload-card">
+
+        <h2>Upload Image</h2>
+
+        <div class="drop-area">
+
+            <div class="upload-icon">
+                ☁️
+            </div>
+
+            <h3>Drag & Drop Image</h3>
+
+            <p>or</p>
+
+            <button class="upload-btn">
+                Choose Image
+            </button>
+
+        </div>
+
+    </div>
+
+    <div class="preview-card">
+
+        <h2>Preview</h2>
+
+        <img
+            src="https://placehold.co/600x350/png?text=Preview"
+            class="preview-image"
+            alt="Preview">
+
+    </div>
+
+    <div class="url-card">
+
+        <h2>Image URL</h2>
+
+        <input
+            type="text"
+            placeholder="https://novabox.vercel.app/image.png"
+            readonly>
+
+        <button class="copy-btn">
+            Copy URL
+        </button>
+
+    </div>
+
+    <button
+        class="apikey-btn"
+        onclick="location.href='loginapikey.html'">
+
+        Get API Key
+
+    </button>
+
+</div>
+
+</body>
+</html>
