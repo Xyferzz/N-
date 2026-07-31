@@ -54,17 +54,25 @@ imageInput.addEventListener("change", async () => {
     const ext = file.name.split(".").pop().toLowerCase();
 
 const code =
-crypto.randomUUID()
-.replace(/-/g, "")
-.substring(0, 6) +
-"." +
-ext;
+    crypto.randomUUID()
+    .replace(/-/g, "")
+    .substring(0, 6) +
+    "." +
+    ext;
 
-    if (linkError) {
-        uploadStatus.textContent = linkError.message;
-        progressBar.style.width = "0%";
-        return;
-    }
+const { error: linkError } = await supabase
+    .from("links")
+    .insert({
+        code: code,
+        file_url: data.publicUrl,
+        extension: ext
+    });
+
+if (linkError) {
+    uploadStatus.textContent = linkError.message;
+    progressBar.style.width = "0%";
+    return;
+}
 
 
     progressBar.style.width = "100%";
