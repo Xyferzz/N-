@@ -77,61 +77,6 @@ ext;
     uploadStatus.textContent = "Upload success.";
 
 });
-/* Upload */
-
-uploadBtn.addEventListener("click", async () => {
-
-    const file = imageInput.files[0];
-
-    if (!file) {
-        alert("Choose an image first.");
-        return;
-    }
-
-    uploadBtn.disabled = true;
-
-    uploadStatus.textContent = "Uploading...";
-
-    progressBar.style.width = "20%";
-
-    const fileName =
-        Date.now() +
-        "_" +
-        file.name.replace(/\s+/g, "_");
-
-    progressBar.style.width = "50%";
-
-    const { error } = await supabase.storage
-        .from("NovaBox")
-        .upload(fileName, file);
-
-    if (error) {
-
-        alert(error.message);
-
-        uploadStatus.textContent = "Upload failed.";
-
-        progressBar.style.width = "0%";
-
-        uploadBtn.disabled = false;
-
-        return;
-
-    }
-
-    progressBar.style.width = "100%";
-
-    const { data } = supabase.storage
-        .from("NovaBox")
-        .getPublicUrl(fileName);
-
-    imageUrl.value = data.publicUrl;
-
-    uploadStatus.textContent = "Upload success.";
-
-    uploadBtn.disabled = false;
-
-});
 
 /* Copy URL */
 
