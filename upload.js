@@ -51,14 +51,14 @@ imageInput.addEventListener("change", async () => {
         .getPublicUrl(fileName);
 
     // Generate short code
-    const code = Math.random().toString(36).substring(2, 8);
+    const ext = file.name.split(".").pop().toLowerCase();
 
-    const { error: linkError } = await supabase
-        .from("links")
-        .insert({
-            code: code,
-            file_url: data.publicUrl
-        });
+const code =
+crypto.randomUUID()
+.replace(/-/g, "")
+.substring(0, 6) +
+"." +
+ext;
 
     if (linkError) {
         uploadStatus.textContent = linkError.message;
